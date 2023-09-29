@@ -1,0 +1,10 @@
+PYTHON = python3
+
+.PHONY: run test clean
+
+run:
+	$(PYTHON) main.py
+test:
+	$(PYTHON) -m unittest game_test.Test
+clean:
+	$(PYTHON) rm -rf __pycache__
