@@ -7,4 +7,4 @@ run:
 test:
 	$(PYTHON) -m unittest game_test.Test
 clean:
-	$(PYTHON) rm -rf __pycache__
+	rm -rf __pycache__
