@@ -20,7 +20,10 @@ def parse_json(json_str: str, keyword_callback=None, required_fields=None, keywo
                     if item in keywords:
                         keyword_callback(item)
     else:
-        print("Make sure that you provided 'keyword_callback', 'required_fields', 'keywords' arguments")
+        print(
+            "Make sure that you provided 'keyword_callback',"
+            " 'required_fields',"
+            " 'keywords' arguments")
 
 
 def mean(k):
