@@ -41,7 +41,6 @@ def mean(k):
             else:
                 print(sum(wrapper.time[len(wrapper.time) - k:len(wrapper.time)]) / len(wrapper.time))
             return res
-
         wrapper.time = []
         return wrapper
 

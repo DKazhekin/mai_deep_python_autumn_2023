@@ -8,3 +8,7 @@ clean:
 	rm -rf __pycache__
 test:
 	$(PYTHON) -m unittest tests.ListTest
+venv:
+	python3 -m venv venv
+	./venv/bin/pip install -r requirements.txt
+
