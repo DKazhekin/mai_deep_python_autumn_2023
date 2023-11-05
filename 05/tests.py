@@ -1,32 +1,25 @@
 import unittest
-from meta_class import CustomMeta, CustomClass
-from descriptor import Integer, String, PositiveInteger, Data
+from LRUcache import LRUCache
+from DoubleLinkedList import Node
 
 
-class Meta_Test(unittest.TestCase):
+class lrucache_test(unittest.TestCase):
     def setUp(self):
-        self.tmp = CustomClass(50)
-        self.tmp2 = CustomClass(200)
-        self.tmp2.added_func = lambda x: x * 2
+        self.cache = LRUCache(5)
 
-    def test_unintialized_meta(self):
-        self.assertEqual(CustomClass.custom_x, 50)
-        self.assertTrue(CustomClass.custom_line)
-        self.assertEqual(CustomClass.custom_y, 50)
+    def test_case_empty(self):
+        self.assertEqual(self.cache.get("1"), None)
+        self.assertEqual(self.cache.get("2"), None)
 
-    def test_initialized_meta(self):
-        self.assertEqual(self.tmp.custom_val, 50)
-        self.assertEqual(self.tmp2.custom_val, 200)
-        self.assertTrue(self.tmp2.custom_added_func)
+    def test_set_get(self):
+        self.cache.set("1", "1")
+        self.assertEqual(self.cache.get("1"), "1")
+        self.cache.set("2", "2")
+        self.cache.set("3", "3")
+        self.cache.set("4", "4")
+        self.cache.set("5", "5")
+        self.assertEqual(self.cache.get("5"), "5")
+        self.cache.set("6", "6")
+        self.assertEqual(self.cache.get("1"), None)
+        self.assertEqual(self.cache.get("6"), "6")
 
-
-class Descriptor_Test(unittest.TestCase):
-
-    def test(self):
-        self.assertTrue(Data(20, "Denis", 4000))
-        with self.assertRaises(ValueError):
-            Data(16, "Denis", 5000)
-        with self.assertRaises(ValueError):
-            Data(20, "Nia", 5000)
-        with self.assertRaises(ValueError):
-            Data(25, "Masha", 40000)

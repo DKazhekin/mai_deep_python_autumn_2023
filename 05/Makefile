@@ -1,11 +1,9 @@
 PYTHON = python3
 
-.PHONY: meta descriptor clean test
+.PHONY: lrucache descriptor clean test
 
-meta:
-	$(PYTHON) meta_class.py
-desctiptor:
-	$(PYTHON) descriptor.py
+lrucache:
+	$(PYTHON) LRUcache.py
 clean:
 	rm -rf __pycache__
 test:
