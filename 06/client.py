@@ -4,18 +4,23 @@ import threading
 import socket
 import argparse
 import queue
+import sys
 
 
 def parse_flags() -> tuple:
     """Parsing flags from cmd"""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--urls", "-u")
-    parser.add_argument("--threads", "-t")
-    args = parser.parse_args()
-    return args.urls, int(args.threads)
+    parser.add_argument("--urls", "-u", help="File with urls")
+    parser.add_argument("--threads", "-t", help="Number of threads")
+    try:
+        args = parser.parse_args()
+        return args.urls, int(args.threads)
+    except argparse.ArgumentError as e:
+        parser.print_help(sys.stderr)
 
 
-def action(client_socket: socket.socket, urls_queue: queue.Queue):
+
+def action(client_socket: socket.socket, urls_queue: queue.Queue) -> None:
     """Action to do for every thread"""
     while True:
         url = urls_queue.get()
@@ -27,7 +32,7 @@ def action(client_socket: socket.socket, urls_queue: queue.Queue):
 
 
 
-def main():
+def main() -> None:
     """Main function"""
     # Defining
     host = '127.0.0.1'

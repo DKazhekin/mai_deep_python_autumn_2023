@@ -12,7 +12,7 @@ from collections import Counter
 HANDLED_URLS = 0
 
 
-def get_words_from_url(url):
+def get_words_from_url(url: str) -> list:
     """Function to take all the words from url"""
     try:
         response = requests.get(url, timeout=5)
@@ -63,10 +63,13 @@ def handle_client(client_socket: socket.socket, c: int) -> None:
 def parse_flags() -> tuple:
     """Parsing flags from cmd"""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--workers", "-w")
-    parser.add_argument("--bests", "-k")
-    args = parser.parse_args()
-    return int(args.workers), int(args.bests)
+    parser.add_argument("--workers", "-w", help="Number of workers")
+    parser.add_argument("--bests", "-k", help="Number of the most frequent words")
+    try:
+        args = parser.parse_args()
+        return int(args.workers), int(args.bests)
+    except argparse.ArgumentError as e:
+        parser.print_help(sys.stderr)
 
 
 def main() -> None:
