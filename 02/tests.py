@@ -6,11 +6,16 @@ from main import parse_json
 
 class Test(unittest.TestCase):
     """Test class"""
+
     def setUp(self) -> None:
         """Set up function"""
-        self.json_string1 = '{"key1": "Word1 word2", "key2": "word2 word3", "key3": "word word"}'
-        self.json_string2 = '{}'
-        self.json_string3 = '{"key11": "Word1 word2", "key22": "word2 word3", "key33": "rods rods"}'
+        self.json_string1 = (
+            '{"key1": "Word1 word2", "key2":' ' "word2 word3", "key3": "word word"}'
+        )
+        self.json_string2 = "{}"
+        self.json_string3 = (
+            '{"key11": "Word1 word2", "key22":' ' "word2 word3", "key33": "rods rods"}'
+        )
         self.parse_json = parse_json
         self.mock_function = Mock()
 
@@ -20,7 +25,7 @@ class Test(unittest.TestCase):
             self.json_string1,
             self.mock_function,
             ["key1", "key2", "key3"],
-            ["word", "word2"]
+            ["word", "word2"],
         )
         self.assertEqual(self.mock_function.call_count, 4)
 
@@ -35,6 +40,6 @@ class Test(unittest.TestCase):
             self.json_string3,
             self.mock_function,
             ["key22", "key33"],
-            ["word2", "word3", "rods"]
+            ["word2", "word3", "rods"],
         )
         self.assertEqual(self.mock_function.call_count, 4)

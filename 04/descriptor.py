@@ -28,7 +28,6 @@ class Integer:
 
 
 class String:
-
     def __init__(self, min_length: int, max_length: int):
         """String Descriptor"""
         self.min = min_length

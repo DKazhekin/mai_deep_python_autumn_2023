@@ -2,7 +2,9 @@ import json
 import time
 
 
-def parse_json(json_str: str, keyword_callback=None, required_fields=None, keywords=None):
+def parse_json(
+    json_str: str, keyword_callback=None, required_fields=None, keywords=None
+):
     try:
         json_doc = json.loads(json_str)
     except json.JSONDecodeError:
@@ -12,10 +14,14 @@ def parse_json(json_str: str, keyword_callback=None, required_fields=None, keywo
         print("Error! Please, provide string type first argument")
         exit(0)
 
-    if callable(keyword_callback) and required_fields is not None and keywords is not None:
+    if (
+        callable(keyword_callback)
+        and required_fields is not None
+        and keywords is not None
+    ):
         for key, value in json_doc.items():
             if key in required_fields:
-                value = value.split(' ')
+                value = value.split(" ")
                 for item in value:
                     if item in keywords:
                         keyword_callback(item)
@@ -23,25 +29,31 @@ def parse_json(json_str: str, keyword_callback=None, required_fields=None, keywo
         print(
             "Make sure that you provided 'keyword_callback',"
             " 'required_fields',"
-            " 'keywords' arguments")
+            " 'keywords' arguments"
+        )
 
 
 def mean(k):
     def timer(fn):
         def wrapper(value):
-
             start = time.time()
             res = fn(value)
             end = time.time()
 
             length = end - start
-            wrapper.time.append(length)
-            if len(wrapper.time) < k:
-                print(sum(wrapper.time) / len(wrapper.time))
+            print(f"YOUR LENGTH IS: {length:.10f}")
+            wrapper.time_.append(length)
+            print(len(wrapper.time_))
+            if len(wrapper.time_) < k:
+                print(f"{(sum(wrapper.time_) / len(wrapper.time_)):.10f}")
             else:
-                print(sum(wrapper.time[len(wrapper.time) - k:len(wrapper.time)]) / len(wrapper.time))
+                print(
+                    sum(wrapper.time_[len(wrapper.time_) - k : len(wrapper.time_)])
+                    / len(wrapper.time_)
+                )
             return res
-        wrapper.time = []
+
+        wrapper.time_ = []
         return wrapper
 
     return timer
@@ -50,6 +62,10 @@ def mean(k):
 @mean(5)
 def print_upper(value: str):
     print(value.upper())
+
+
+# print_upper = timer(print_upper)
+# print_upper = wrapper()
 
 
 def main():

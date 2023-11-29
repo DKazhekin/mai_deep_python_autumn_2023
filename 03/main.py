@@ -27,7 +27,7 @@ class CustomList(list):
         res = list(map(lambda x, y: x + y, self.body, body2))
 
         bigger = self.body if (len(self.body) > len(body2)) else body2
-        res += bigger[min(len(self.body), len(body2)): max(len(self.body), len(body2))]
+        res += bigger[min(len(self.body), len(body2)) : max(len(self.body), len(body2))]
         return res
 
     def __radd__(self, other):
@@ -37,10 +37,21 @@ class CustomList(list):
         body2 = other.body if isinstance(other, CustomList) else other
         res = list(map(lambda x, y: x - y, self.body, body2))
 
-        zeros = [0 for _ in range(len(body2) - len(self.body))] if len(body2) > len(self.body) else []
+        zeros = (
+            [0 for _ in range(len(body2) - len(self.body))]
+            if len(body2) > len(self.body)
+            else []
+        )
         res += list(
-            map(lambda x, y: x - y, zeros, body2[min(len(self.body), len(body2)): max(len(self.body), len(body2))]))
-        res += list(self.body[len(body2): len(self.body)])
+            map(
+                lambda x, y: x - y,
+                zeros,
+                body2[
+                    min(len(self.body), len(body2)) : max(len(self.body), len(body2))
+                ],
+            )
+        )
+        res += list(self.body[len(body2) : len(self.body)])
         return res
 
     def __rsub__(self, other):

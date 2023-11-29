@@ -26,11 +26,13 @@ class User:
         if role.lower() in ("crosses", "circles"):
             self._role = role
         else:
-            raise ValueError("You need to choose your playing side to continue!\n"
+            raise ValueError("You need to choose "
+                             "your playing side to continue!\n"
                              "'Crosses' and 'Circles' are in option")
 
     def __str__(self):
-        return f"User object with {self._name} name and {self._role} playing side"
+        return (f"User object with {self._name}"
+                f" name and {self._role} playing side")
 
     @staticmethod
     def greetings():
@@ -45,9 +47,11 @@ class User:
                 raise ValueError
         except ValueError:
             raise ValueError("Check info you are providing, "
-                             "may be you forgot to select your Playing Side or Name\n"
+                             "may be you forgot to select "
+                             "your Playing Side or Name\n"
                              "Also, there is an option that "
-                             "you have chosen the same Playing Sides, it's prohibitted")
+                             "you have chosen the same"
+                             " Playing Sides, it's prohibitted")
 
         return User(name1, role1), User(name2, role2)
 
@@ -59,9 +63,11 @@ class Board:
         self.graph = [[' '] * 13 for _ in range(13)]
 
     def set_value(self, i: int, j: int, play_side: str):
-        if isinstance(i, int) and isinstance(j, int) and 0 <= i <= 2 and 0 <= j <= 2:
+        if (isinstance(i, int) and
+                isinstance(j, int) and 0 <= i <= 2 and 0 <= j <= 2):
             if self.board[i][j] is not None:
-                raise ValueError("Error! Check the place where you drawing figure")
+                raise ValueError("Error!"
+                                 " Check the place where you drawing figure")
             if play_side.lower() == "crosses":
                 self.board[i][j] = 1
             else:
@@ -144,7 +150,7 @@ class Board:
 
         try:
             y, x = map(int, input().split(' '))
-        except ValueError as ex:
+        except ValueError:
             raise ValueError("Check coordinates you are providing as: <y> <x>")
         self.set_value(y, x, obj.role)
         if self.check_win(obj.name):
@@ -176,7 +182,8 @@ def main():
         game_length += 1
 
     if game_length == 9:
-        print("Oops, seems you are both so strong in this game! Try again! Draw!")
+        print("Oops, seems you are both so strong"
+              " in this game! Try again! Draw!")
 
 
 if __name__ == '__main__':

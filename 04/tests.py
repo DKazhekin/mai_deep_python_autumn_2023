@@ -21,7 +21,6 @@ class Meta_Test(unittest.TestCase):
 
 
 class Descriptor_Test(unittest.TestCase):
-
     def test(self):
         self.assertTrue(Data(20, "Denis", 4000))
         with self.assertRaises(ValueError):
