@@ -7,3 +7,5 @@
 * Lab5: LRUcache own realisation
 * Lab6: Client-Server application for running a set of urls with load limitation in multithreading mode
 * Lab9: C-extension through C/Python API for JSON seriaization and deserialization
+
+## P.S. More information about tasks in README.md file right in directories
