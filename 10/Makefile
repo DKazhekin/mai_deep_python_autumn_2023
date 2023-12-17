@@ -5,7 +5,6 @@ PYTHON=python3
 all: venv setup
 
 setup:
-	./env/bin/pip install .
 	./env/bin/pip install -r requirements.txt
 
 venv:
@@ -15,4 +14,4 @@ test:
 	$(PYTHON) tests.py
 
 clean:
-	rm -rf build cjson.egg-info env
+	rm -rf env

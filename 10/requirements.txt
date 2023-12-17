@@ -1,1 +1,3 @@
-ujson
+aiohttp
+asyncio
+requests
